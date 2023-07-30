@@ -9,7 +9,7 @@ public class CashbackHackServiceTest {
     CashbackHackService service = new CashbackHackService();
 
     @Test
-    public void minAmount() {
+    public void minimumValueAmount() {
 
         int amount = 1;
 
@@ -18,9 +18,8 @@ public class CashbackHackServiceTest {
 
         Assert.assertEquals(expected, actual);
     }
-
     @Test
-    public void minAmountPlusOne() {
+    public void minimumValueAmountPlusOne() {
 
         int amount = 2;
 
@@ -30,12 +29,13 @@ public class CashbackHackServiceTest {
         Assert.assertEquals(expected, actual);
     }
 
+
     @Test
-    public void amountLessBoundary() {
+    public void valueLessThanLimitAmount() {
 
-        int amount = 600;
+        int amount = 340;
 
-        int expected = 400;
+        int expected = 660;
         int actual = service.remain(amount);
 
         Assert.assertEquals(expected, actual);
@@ -53,7 +53,7 @@ public class CashbackHackServiceTest {
     }
 
     @Test
-    public void amountEqualBoundary() {
+    public void theValueOfTheLimitAmount() {
 
         int amount = 1000;
 
@@ -64,7 +64,7 @@ public class CashbackHackServiceTest {
     }
 
     @Test
-    public void amountEqualBoundaryPlusOne() {
+    public void theValueOfTheLimitAmountPlusOne() {
 
         int amount = 1001;
 
@@ -75,25 +75,25 @@ public class CashbackHackServiceTest {
     }
 
     @Test
-    public void amountMoreBoundary() {
+    public void limitValueAmountWithValueInMillions() {
 
-        int amount = 3_550;
+        int amount = 10_735_504;
 
-        int expected = 450;
+        int expected = 496;
+        int actual = service.remain(amount);
+
+        Assert.assertEquals(expected, actual);
+    } @Test
+    public void amountLimitWhenTheValueExceedsSeveralThousand() {
+
+        int amount = 2_150;
+
+        int expected = 850;
         int actual = service.remain(amount);
 
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void amountBigMoreBoundary() {
 
-        int amount = 2_556_594;
-
-        int expected = 406;
-        int actual = service.remain(amount);
-
-        Assert.assertEquals(expected, actual);
-    }
 
 }
